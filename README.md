@@ -7,6 +7,21 @@
 * **Simple development** - Just VS Code and Python (no Apache/PHP server with Docker)
 * **Automated deployment** - A GitHub action requests `deploy.php` to `git pull; python palila.py`
 
+### Quickstart
+
+```python
+import palila
+palila.makeIndex("./page1/", "template.html")
+```
+
+### Templating
+
+Palila uses [mustache](https://mustache.github.io) logic-less template tags
+
+```html
+<title>{{TITLE}}</title>
+```
+
 ### Development Status
 
 This library was created with the intent only for the author to use it, but it is open-sourced (under the permissive MIT license) in case anyone else finds it useful.
