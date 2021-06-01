@@ -2,16 +2,34 @@ import pathlib
 import datetime
 import markdown
 
+def recursivelyDeleteIndexes(folder: pathlib.Path):
+    """
+    Recursively search for and delete index.html
+    """
+    indexFile = folder.joinpath("index.html")
+    if (indexFile.exists()):
+        print(f"deleting {indexFile.resolve()}")
+        indexFile.unlink()
+    for subFolder in [x for x in folder.glob("**/*") if x.is_dir()]:
+        recursivelyDeleteIndexes(subFolder)
 
-def makeIndex(folder: pathlib.Path, templateFile: pathlib.Path):
+def recursivelyMakeIndexes(folder: pathlib.Path, templateFile: pathlib.Path):
     """
-    Given a folder with index.md and a template, convert the markdown to HTML, 
-    place it in the template, and save the output as index.html in the same folder.
-    Optionally provide a dictionary of search/replace strings.
+    Recursively search folders for index.md convert them to index.html using the template
     """
-    markdownFile = folder.joinpath("index.md")
+    makeIndex(folder.joinpath("index.md"), templateFile)
+    for subFolder in [x for x in folder.glob("**/*") if x.is_dir()]:
+        recursivelyMakeIndexes(subFolder, templateFile)
+
+
+def makeIndex(markdownFile: pathlib.Path, templateFile: pathlib.Path):
+    """
+    Convert the given index.md to index.html using the template
+    """
     if markdownFile.exists() == False:
         raise Exception("does not exist: " + markdownFile.resolve())
+    if (markdownFile.name != "index.md"):
+        raise Exception("markdown files must be named index.md")
     if templateFile.exists() == False:
         raise Exception("does not exist: " + markdownFile.resolve())
 
@@ -19,14 +37,14 @@ def makeIndex(folder: pathlib.Path, templateFile: pathlib.Path):
     markdownText = markdownFile.read_text()
 
     # https://github.com/Python-Markdown/markdown/wiki/Third-Party-Extensions
-    markdownHtml = markdown.markdown(markdownText,
-                                     extensions=['fenced_code', 'tables', 'codehilite', 'meta', 'toc'])
+    markdownHtml = markdown.markdown(markdownText, extensions=\
+        ['fenced_code', 'tables', 'codehilite', 'meta', 'toc', 'md_in_html'])
 
     # read template and perform replacements
     templateHtml = templateFile.read_text()
     html = templateHtml.replace("{{CONTENT}}", markdownHtml)
     defaultReplacements = {
-        "{{TITLE}}": folder.name,
+        "{{TITLE}}": markdownFile.parent.name,
         "{{DATE}}": str(datetime.datetime.now().strftime("%x")),
         "{{TIME}}": str(datetime.datetime.now().strftime("%X")),
     }
@@ -34,6 +52,6 @@ def makeIndex(folder: pathlib.Path, templateFile: pathlib.Path):
         html = html.replace(key, value)
 
     # save output
-    outputFile = folder.joinpath("index.html")
+    outputFile = markdownFile.parent.joinpath("index.html")
     outputFile.write_text(html)
     print(f"generated {outputFile.resolve()}")
