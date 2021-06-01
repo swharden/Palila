@@ -18,3 +18,11 @@ See your changes in real time as you make them
 * Edit markdown in VS code
 * Use a shortcut to run palila (regenerating index.html)
 * Use VS code "Live Server" extension to auto-refresh index.html
+
+## TODO
+* header anchors
+* embedded youtube videos
+* table of contents
+* optionally pass index.md or folder containing it
+* syntax highlighting
+* clickable images
