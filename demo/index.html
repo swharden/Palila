@@ -59,83 +59,87 @@
 <body class="bg-light">
     <div class="container mx-auto">
         <div class="row shadow my-5 p-3 bg-white">
-            <h1>Demo Page</h1>
-
+            <h1 id="demo-page">Demo Page</h1>
 <p>Hi this is <em>markdown</em> and it <strong>works</strong>!</p>
-
-<h2>Images</h2>
-
-<p><img src="monalisa.png" alt="" /></p>
-
-<h2>Code Blocks</h2>
-
-<pre><code>var plt = new ScottPlot.Plot(600, 400);
+<h2 id="table-of-contents">Table of Contents</h2>
+<div class="toc">
+<ul>
+<li><a href="#demo-page">Demo Page</a><ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#images">Images</a></li>
+<li><a href="#code-blocks">Code Blocks</a></li>
+<li><a href="#tables">Tables</a></li>
+<li><a href="#dynamic-content">Dynamic Content</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="images">Images</h2>
+<p><img alt="" src="monalisa.png" /></p>
+<h2 id="code-blocks">Code Blocks</h2>
+<pre class="codehilite"><code class="language-cs">var plt = new ScottPlot.Plot(600, 400);
 double[,] imageData = DataGen.SampleImageData();
 plt.AddHeatmap(imageData);
-plt.SaveFig("monalisa.png");
+plt.SaveFig(&quot;monalisa.png&quot;);
 </code></pre>
 
-<h2>Tables</h2>
-
+<h2 id="tables">Tables</h2>
 <table>
 <thead>
 <tr>
-  <th>Name</th>
-  <th>Charge</th>
-  <th>pipette (mM)</th>
-  <th>bath (mM)</th>
+<th>Name</th>
+<th>Charge</th>
+<th>pipette (mM)</th>
+<th>bath (mM)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-  <td>K</td>
-  <td>+1</td>
-  <td>145</td>
-  <td>2.8</td>
+<td>K</td>
+<td>+1</td>
+<td>145</td>
+<td>2.8</td>
 </tr>
 <tr>
-  <td>Na</td>
-  <td>+1</td>
-  <td>13</td>
-  <td>145</td>
+<td>Na</td>
+<td>+1</td>
+<td>13</td>
+<td>145</td>
 </tr>
 <tr>
-  <td>Mg</td>
-  <td>+2</td>
-  <td>1</td>
-  <td>2</td>
+<td>Mg</td>
+<td>+2</td>
+<td>1</td>
+<td>2</td>
 </tr>
 <tr>
-  <td>Ca</td>
-  <td>+2</td>
-  <td>0</td>
-  <td>1</td>
+<td>Ca</td>
+<td>+2</td>
+<td>0</td>
+<td>1</td>
 </tr>
 <tr>
-  <td>HEPES</td>
-  <td>-1</td>
-  <td>5</td>
-  <td>5</td>
+<td>HEPES</td>
+<td>-1</td>
+<td>5</td>
+<td>5</td>
 </tr>
 <tr>
-  <td>Gluconate</td>
-  <td>-1</td>
-  <td>145</td>
-  <td>0</td>
+<td>Gluconate</td>
+<td>-1</td>
+<td>145</td>
+<td>0</td>
 </tr>
 <tr>
-  <td>Cl</td>
-  <td>-1</td>
-  <td>10</td>
-  <td>148.8</td>
+<td>Cl</td>
+<td>-1</td>
+<td>10</td>
+<td>148.8</td>
 </tr>
 </tbody>
 </table>
-
-<h2>Dynamic Content</h2>
-
-<p>Page generated at 23:10:24 on 05/31/21 🚀</p>
-
+<h2 id="dynamic-content">Dynamic Content</h2>
+<p>Page generated at 00:20:02 on 06/01/21 🚀</p>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"

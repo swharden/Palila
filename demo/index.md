@@ -2,6 +2,9 @@
 
 Hi this is _markdown_ and it **works**!
 
+## Table of Contents
+[TOC]
+
 ## Images
 
 ![](monalisa.png)

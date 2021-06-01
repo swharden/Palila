@@ -20,9 +20,10 @@ See your changes in real time as you make them
 * Use VS code "Live Server" extension to auto-refresh index.html
 
 ## TODO
-* header anchors
+* header ids and anchors
 * embedded youtube videos
 * table of contents
 * optionally pass index.md or folder containing it
 * syntax highlighting
 * clickable images
+* frontmatter
