@@ -8,5 +8,6 @@ Hi this is _markdown_ and it **works**!
 * [Image Formatting](images)
 * [Table of Contents](toc)
 * [YouTube Videos](videos)
+* [Syntax Highlighting](code)
 
 Page generated at {{TIME}} on {{DATE}} 🚀

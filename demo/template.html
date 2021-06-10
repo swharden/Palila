@@ -8,10 +8,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.1/build/styles/xcode.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.1/build/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+
     <title>{{TITLE}}</title>
     <style>
         /* code blocks */
-        pre {
+        pre2 {
             display: inline-block;
             border: 1px solid #E6E6E6;
             padding: 1em;
@@ -83,7 +87,26 @@
             max-width: 65% !important;
             margin: 1em !important;
         }
-        
+
+        /* code blocks */
+
+        pre code.hljs {
+            background: transparent;
+            padding: 0em;
+        }
+
+        pre {
+            display: block;
+            margin-top: 2em;
+            margin-bottom: 2em;
+            padding: .5em !important;
+            background: #f8f8f8;
+            border-radius: 5px;
+            border: 1px solid #ddd !important;
+            font-size: 14px;
+            line-height: 150%;
+            overflow-x: auto;
+        }
     </style>
 </head>
 
@@ -117,6 +140,7 @@
                             <li><a class="dropdown-item" href="/demo/images">Image Formatting</a></li>
                             <li><a class="dropdown-item" href="/demo/toc">Table of Contents</a></li>
                             <li><a class="dropdown-item" href="/demo/videos">YouTube Videos</a></li>
+                            <li><a class="dropdown-item" href="/demo/code">Syntax Highlighting</a></li>
                         </ul>
                     </li>
 
