@@ -54,6 +54,11 @@
             margin: 1em 0em .5em 0em !important;
         }
 
+        /* increase space around lists */
+        ul {
+            margin-left: 1.5em !important;
+        }
+
         /* optional styling to place in divs around images */
         .img-border img {
             border: 1px solid black;
@@ -65,10 +70,53 @@
 </head>
 
 <body class="bg-light">
-    <div class="container mx-auto">
-        <div class="row shadow my-5 p-3 bg-white">
+    <div class="container mx-auto shadow mb-5">
+
+        <div class="row bg-dark text-light">
+
+            <div>
+                <div class="display-1 ps-3 pt-3">
+                    Palila
+                </div>
+            </div>
+
+            <!-- MENU URLS MUST BE ABSOLUTE -->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <ul class="navbar-nav p-0 m-0">
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="/demo/">
+                            Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item mx-2 dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                            Demos
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark">
+                            <li><a class="dropdown-item" href="/demo/dynamic-content">Dynamic Content</a></li>
+                            <li><a class="dropdown-item" href="/demo/images">Image Formatting</a></li>
+                            <li><a class="dropdown-item" href="/demo/toc">Table of Contents</a></li>
+                            <li><a class="dropdown-item" href="/demo/videos">YouTube Videos</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item mx-2">
+                        <a class="nav-link" href="https://github.com/swharden/Palila">
+                            GitHub
+                        </a>
+                    </li>
+
+                </ul>
+            </nav>
+
+        </div>
+
+        <div class="row p-3 bg-white">
             {{CONTENT}}
         </div>
+
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
