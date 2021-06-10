@@ -6,16 +6,13 @@
 * **Folder names are URLs** - `index.html` is generated in folders containing `index.md`
 * **No routing** - No need to engage PHP or `.htaccess` to route requests
 * **Simple development** - Just VS Code and Python (no Apache/PHP server with Docker)
-* **Automated deployment** - A GitHub action requests `deploy.php` to `git pull; python palila.py`
+* **Automated deployment** - A GitHub action requests `deploy.php` to `git pull; python build.py`
 * **Easy customization** - Syntax highlighting, table of contents, anchor headings, embedded YouTube videos, etc...
 
 ### Quickstart
 
-```python
-import palila    
-templateFile = "./demo/template.html"
-demoFolder = "./demo/"
-palila.recursivelyMakeIndexes(demoFolder, templateFile)
+```bash
+python build.py
 ```
 
 ### Templating
