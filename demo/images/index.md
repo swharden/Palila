@@ -1,25 +1,28 @@
-# Image Styling Notes
+# Image Formatting
 
 Include images inside `div` blocks with certain classes to control how they display.
 
 ## Default
 
-By default images occupy the full width and are left-aligned
+* small images are left-aligned
+* large images occupy the full width
 
-```
-TODO: ![](small.jpg)
+```html
+![](small.jpg)
 ```
 
 ![](small.jpg)
 
 ## Center
 
-Use bootstrap's `text-center`
+* To center an image use bootstrap's `text-center` in a `div`
+* Spaces above and below the image line are recommended
+* To include markdown inside HTML `div` apply the `markdown="block"` attribute
 
-```
-<div class="text-center">
+```html
+<div markdown="block" class="text-center">
 
-TODO: ![](small.jpg)
+![](small.jpg)
 
 </div>
 ```
@@ -32,13 +35,10 @@ TODO: ![](small.jpg)
 
 ## Border and Shadow
 
-These two stylings come together with the `img-border` class aasdfasdfasdf
+```html
+<div markdown="block" class="text-center img-border">
 
-
-```
-<div class="text-center img-border">
-
-TODO: ![](small.jpg)
+![](small.jpg)
 
 </div>
 ```

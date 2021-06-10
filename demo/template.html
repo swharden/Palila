@@ -44,11 +44,6 @@
             padding: .4em;
         }
 
-        /* embedded images */
-        img {
-            max-width: 100%;
-        }
-
         /* increase space around headings */
         h2 {
             margin: 1em 0em .5em 0em !important;
@@ -59,18 +54,41 @@
             margin-left: 1.5em !important;
         }
 
-        /* optional styling to place in divs around images */
+        /* embedded images */
+        img {
+            margin-top: 1em;
+            margin-bottom: 1em;
+            max-width: 100% !important;
+        }
+
         .img-border img {
             border: 1px solid black;
             box-shadow: 5px 5px 10px rgb(0 0 0 / 20%);
             margin-top: 1em;
             margin-bottom: 2em;
         }
+
+        .img-micro img {
+            max-width: 25% !important;
+            max-height: 12em !important;
+            margin: .5em !important;
+        }
+
+        .img-small img {
+            max-width: 35% !important;
+            margin: 1em !important;
+        }
+
+        .img-medium img {
+            max-width: 65% !important;
+            margin: 1em !important;
+        }
+        
     </style>
 </head>
 
 <body class="bg-light">
-    <div class="container mx-auto shadow mb-5">
+    <div class="container mx-auto shadow m-5">
 
         <div class="row bg-dark text-light">
 
