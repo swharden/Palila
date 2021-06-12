@@ -69,6 +69,21 @@ def makeIndex(markdownFile: pathlib.Path, templateFile: pathlib.Path):
             insideCodeBlock = ~insideCodeBlock
         if (insideCodeBlock):
             continue
+        isLinkLine = line.startswith("![](http") and line.strip().endswith(")")
+        hasYouTubeLink = "://youtu" in line.lower()
+        if isLinkLine and hasYouTubeLink:
+            url = line[4:-1]
+            url = "https://www.youtube.com/embed/" + pathlib.Path(url).name
+            markdownLines[i] = "<div class='ratio ratio-16x9 my-5'>" + \
+                f"<object class='border border-dark shadow' data='{url}'></object></div>"           
+
+    # add TOC to page
+    insideCodeBlock = False
+    for i, line in enumerate(markdownLines):
+        if (line.startswith("```")):
+            insideCodeBlock = ~insideCodeBlock
+        if (insideCodeBlock):
+            continue
         if line.startswith("![](TOC)"):
             tocMarkdown = ""
             for level, title in tocItems:
