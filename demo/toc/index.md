@@ -8,10 +8,6 @@ A Table of Contents can be easily added to the top of your article like this:
 ![](TOC)
 ```
 
-### Note
-
-Anything above the `![](TOC)` won't be included in the table of contents
-
 ## Sample Output
 
 ![](TOC)
