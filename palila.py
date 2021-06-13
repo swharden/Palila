@@ -2,18 +2,7 @@ import pathlib
 import datetime
 import markdown
 import time
-
-
-def recursivelyDeleteIndexes(folder: pathlib.Path):
-    """
-    Recursively search for and delete index.html
-    """
-    indexFile = folder.joinpath("index.html")
-    if (indexFile.exists()):
-        print(f"deleting {indexFile.resolve()}")
-        indexFile.unlink()
-    for subFolder in [x for x in folder.glob("**/*") if x.is_dir()]:
-        recursivelyDeleteIndexes(subFolder)
+import argparse
 
 
 def recursivelyMakeIndexes(folder: pathlib.Path, templateFile: pathlib.Path):
@@ -21,7 +10,12 @@ def recursivelyMakeIndexes(folder: pathlib.Path, templateFile: pathlib.Path):
     Recursively search folders for index.md convert them to index.html using the template
     """
     indexMarkdownFile = folder.joinpath("index.md")
+    indexFile = folder.joinpath("index.html")
     if (indexMarkdownFile.exists()):
+        if (indexFile.exists()):
+            print(f"deleting\t{indexFile.resolve()}")
+            indexFile.unlink()
+        print(f"generating\t{indexFile}")
         makeIndex(indexMarkdownFile, templateFile)
     for subFolder in [x for x in folder.glob("**/*") if x.is_dir()]:
         recursivelyMakeIndexes(subFolder, templateFile)
@@ -121,4 +115,24 @@ def makeIndex(markdownFile: pathlib.Path, templateFile: pathlib.Path):
     # save output
     outputFile = markdownFile.parent.joinpath("index.html")
     outputFile.write_text(html, encoding="utf-8")
-    print(f"generated {outputFile.resolve()}")
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Build a website with Palila')
+    parser.add_argument('-r', metavar='FOLDER', type=pathlib.Path, required=True,
+                        help='root website folder to recursively search for markdown files')
+    parser.add_argument('-p', metavar='FILE', type=pathlib.Path, required=True,
+                        help='path to page template')
+    args = parser.parse_args()
+
+    rootPath = pathlib.Path(args.r).resolve()
+    if not rootPath.exists() or not rootPath.is_dir():
+        raise Exception(f"folder does not exist: {rootPath}")
+    print(f"root folder: {rootPath}")
+
+    pageTemplate = pathlib.Path(args.p).resolve()
+    if not pageTemplate.exists() or not pageTemplate.is_file():
+        raise Exception(f"file does not exist: {pageTemplate}")
+    print(f"page template: {pageTemplate}")
+
+    recursivelyMakeIndexes(rootPath, pageTemplate)

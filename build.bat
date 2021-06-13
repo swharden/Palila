@@ -1,0 +1,1 @@
+palila.py -r demo -p demo/template.html
