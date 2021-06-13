@@ -22,10 +22,29 @@ def recursivelyMakeIndexes(folder: pathlib.Path, templateFile: pathlib.Path):
 
 
 def safeUrl(s: str):
-    # TODO: make better
-    s = s.replace(" ", "-")
-    s = s.lower()
-    return s
+    """
+    Convert a string into a url-safe anchor tag
+    """
+
+    # must be lowercase
+    tag = s.lower()
+
+    # non-alphanumeric letters are replaced by dashes
+    letters = list(tag)
+    for i, letter in enumerate(letters):
+        if letter.isalpha() or letter.isnumeric():
+            continue
+        letters[i] = "-"
+    tag = "".join(letters)
+
+    # disallow multiple dashes
+    while "--" in tag:
+        tag = tag.replace("--", "-")
+    
+    # disallow starting or ending with a dash
+    tag = tag.strip("-")
+    
+    return tag
 
 
 def makeIndex(markdownFile: pathlib.Path, templateFile: pathlib.Path):
