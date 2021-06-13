@@ -20,7 +20,9 @@ def recursivelyMakeIndexes(folder: pathlib.Path, templateFile: pathlib.Path):
     """
     Recursively search folders for index.md convert them to index.html using the template
     """
-    makeIndex(folder.joinpath("index.md"), templateFile)
+    indexMarkdownFile = folder.joinpath("index.md")
+    if (indexMarkdownFile.exists()):
+        makeIndex(indexMarkdownFile, templateFile)
     for subFolder in [x for x in folder.glob("**/*") if x.is_dir()]:
         recursivelyMakeIndexes(subFolder, templateFile)
 
@@ -45,7 +47,7 @@ def makeIndex(markdownFile: pathlib.Path, templateFile: pathlib.Path):
     timeStart = time.time()
 
     # read markdown
-    markdownLines = markdownFile.read_text().split("\n")
+    markdownLines = markdownFile.read_text(encoding="utf-8").split("\n")
 
     # make anchors clickable and remember TOC items
     insideCodeBlock = False
@@ -62,20 +64,29 @@ def makeIndex(markdownFile: pathlib.Path, templateFile: pathlib.Path):
             markdownLines[i] = f"{hashes} [{title}](#{safeUrl(title)})"
             tocItems.append([len(hashes), title])
 
-    # add TOC to page
+    # replace one-line links with special content
     insideCodeBlock = False
     for i, line in enumerate(markdownLines):
         if (line.startswith("```")):
             insideCodeBlock = ~insideCodeBlock
         if (insideCodeBlock):
             continue
-        isLinkLine = line.startswith("![](http") and line.strip().endswith(")")
-        hasYouTubeLink = "://youtu" in line.lower()
-        if isLinkLine and hasYouTubeLink:
-            url = line[4:-1]
+        isLinkLine = line.startswith("![](") and line.strip().endswith(")")
+        if not isLinkLine:
+            continue
+
+        url = line[4:-1]
+        extension = url.lower().split(".")[-1]
+
+        if extension == "png" or extension == "jpg" or extension == "gif":
+            markdownLines[i] = f"<a href='{url}'><img src='{url}'></a>"
+            continue
+
+        if "://youtu" in line.lower():
             url = "https://www.youtube.com/embed/" + pathlib.Path(url).name
             markdownLines[i] = "<div class='ratio ratio-16x9 my-5'>" + \
-                f"<object class='border border-dark shadow' data='{url}'></object></div>"           
+                f"<object class='border border-dark shadow' data='{url}'></object></div>"
+            continue
 
     # add TOC to page
     insideCodeBlock = False
@@ -109,5 +120,5 @@ def makeIndex(markdownFile: pathlib.Path, templateFile: pathlib.Path):
 
     # save output
     outputFile = markdownFile.parent.joinpath("index.html")
-    outputFile.write_text(html)
+    outputFile.write_text(html, encoding="utf-8")
     print(f"generated {outputFile.resolve()}")
