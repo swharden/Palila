@@ -17,6 +17,7 @@ Features:
   * Simple layout and CSS using Bootstrap
 """
 
+from os import path
 import pathlib
 import datetime
 import markdown
@@ -24,7 +25,7 @@ import time
 import argparse
 
 
-def generateIndexesRecursively(folder: pathlib.Path, templateFile: pathlib.Path):
+def generateIndexesRecursively(folder: pathlib.Path, templateFile: pathlib.Path, siteRoot: pathlib.Path):
     """
     Recursively search folders for index.md convert them to index.html using the template
     """
@@ -35,15 +36,15 @@ def generateIndexesRecursively(folder: pathlib.Path, templateFile: pathlib.Path)
             print(f"deleting\t{indexFile.resolve()}")
             indexFile.unlink()
         print(f"generating\t{indexFile}")
-        pg = PageGenerator(indexMarkdownFile, templateFile)
+        pg = PageGenerator(indexMarkdownFile, templateFile, siteRoot)
         pg.save()
     for subFolder in [x for x in folder.glob("**/*") if x.is_dir()]:
-        generateIndexesRecursively(subFolder, templateFile)
+        generateIndexesRecursively(subFolder, templateFile, siteRoot)
 
 
 class PageGenerator:
 
-    def __init__(self, markdownFile: pathlib.Path, templateFile: pathlib.Path):
+    def __init__(self, markdownFile: pathlib.Path, templateFile: pathlib.Path, siteRoot: pathlib.Path):
         self.folder = markdownFile.parent
         self.timeStart = time.time()
 
@@ -130,6 +131,12 @@ class PageGenerator:
                 adsWrapStart = "<!--"
                 adsWrapEnd = "-->"
 
+        # determine the base URL
+        relPath = markdownFile.parent.relative_to(siteRoot)
+        foldersDeep = len(relPath.parts)
+        baseUrl = "./" + "../" * foldersDeep
+        baseUrl = baseUrl.strip("/")
+
         # read template and perform replacements
         html = templateFile.read_text()
         defaultReplacements = {
@@ -137,6 +144,7 @@ class PageGenerator:
             "{{HEAD_DESCRIPTION}}": description,
             "{{ADS_WRAP_START}}": adsWrapStart,
             "{{ADS_WRAP_END}}": adsWrapEnd,
+            "{{BASE_URL}}": baseUrl,
             "{{BUILD_UTC_DATE}}": str(datetime.datetime.utcnow().strftime("%x")),
             "{{BUILD_UTC_TIME}}": str(datetime.datetime.utcnow().strftime("%X")),
             "{{BUILD_TIME_MS}}": f"{(time.time() - self.timeStart) * 1000:.1f}",
@@ -226,4 +234,4 @@ if __name__ == "__main__":
         raise Exception(f"file does not exist: {pageTemplate}")
     print(f"page template: {pageTemplate}")
 
-    generateIndexesRecursively(rootPath, pageTemplate)
+    generateIndexesRecursively(rootPath, pageTemplate, rootPath)
