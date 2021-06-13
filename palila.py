@@ -55,8 +55,10 @@ class PageGenerator:
         if templateFile.exists() == False:
             raise Exception("does not exist: " + markdownFile.resolve())
 
-        # break markdown into lines and identify which are code
+        # read markdown file and process frontmatter
         markdownLines = markdownFile.read_text(encoding="utf-8").split("\n")
+
+        # identify which lines are in code blocks and which aren't
         linesWithoutCode = self.getMarkdownLinesWithoutCode(markdownLines)
 
         # make anchors clickable and remember TOC items
@@ -101,8 +103,9 @@ class PageGenerator:
 
         # convert markdown to HTML
         # https://github.com/Python-Markdown/markdown/wiki/Third-Party-Extensions
-        htmlLines = markdown.markdown("\n".join(markdownLines),
-                                      extensions=['fenced_code', 'tables', 'meta', 'md_in_html']).split("\n")
+        md = markdown.Markdown(
+            extensions=['fenced_code', 'tables', 'meta', 'md_in_html'])
+        htmlLines = md.convert("\n".join(markdownLines)).split("\n")
 
         # add anchors to headings
         for i in self.getHtmlLinesWithoutCode(htmlLines):
@@ -111,10 +114,29 @@ class PageGenerator:
                 anchorName = line.split('"')[1][1:]
                 htmlLines[i] = line.replace(">", f" id='{anchorName}'>", 1)
 
+        # prepare default replacements
+        title = markdownFile.parent.name
+        description = ""
+        adsWrapStart = ""
+        adsWrapEnd = ""
+
+        # modify replacements based on frontmatter
+        for key, value in md.Meta.items():
+            if key.lower() == "title":
+                title = value[0]
+            elif key.lower() == "description":
+                description = value[0]
+            elif key.lower() == "noads" and value[0].lower() != "false":
+                adsWrapStart = "<!--"
+                adsWrapEnd = "-->"
+
         # read template and perform replacements
         html = templateFile.read_text()
         defaultReplacements = {
-            "{{HEAD_TITLE}}": markdownFile.parent.name,
+            "{{HEAD_TITLE}}": title,
+            "{{HEAD_DESCRIPTION}}": description,
+            "{{ADS_WRAP_START}}": adsWrapStart,
+            "{{ADS_WRAP_END}}": adsWrapEnd,
             "{{BUILD_UTC_DATE}}": str(datetime.datetime.utcnow().strftime("%x")),
             "{{BUILD_UTC_TIME}}": str(datetime.datetime.utcnow().strftime("%X")),
             "{{BUILD_TIME_MS}}": f"{(time.time() - self.timeStart) * 1000:.1f}",
