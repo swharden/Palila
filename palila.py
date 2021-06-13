@@ -1,3 +1,22 @@
+"""
+Palila is a minimal markdown static site generator.
+https://github.com/swharden/Palila
+
+Rules:
+  * Folders are recursively scanned to generate index.html from index.md when found
+  * URLs therefore are just folder paths
+  * Links in pages are all relative
+  * Links in template must be absolute
+
+Features:
+  * Images are clickable
+  * ![](YouTubeURL) becomes an embedded video
+  * ![](TOC) inserts a table of contents
+  * Headings are automatically given named anchors
+  * Automatic syntax highlighting
+  * Simple layout and CSS using Bootstrap
+"""
+
 import pathlib
 import datetime
 import markdown
@@ -5,7 +24,7 @@ import time
 import argparse
 
 
-def recursivelyMakeIndexes(folder: pathlib.Path, templateFile: pathlib.Path):
+def generateIndexesRecursively(folder: pathlib.Path, templateFile: pathlib.Path):
     """
     Recursively search folders for index.md convert them to index.html using the template
     """
@@ -19,7 +38,7 @@ def recursivelyMakeIndexes(folder: pathlib.Path, templateFile: pathlib.Path):
         pg = PageGenerator(indexMarkdownFile, templateFile)
         pg.save()
     for subFolder in [x for x in folder.glob("**/*") if x.is_dir()]:
-        recursivelyMakeIndexes(subFolder, templateFile)
+        generateIndexesRecursively(subFolder, templateFile)
 
 
 class PageGenerator:
@@ -185,4 +204,4 @@ if __name__ == "__main__":
         raise Exception(f"file does not exist: {pageTemplate}")
     print(f"page template: {pageTemplate}")
 
-    recursivelyMakeIndexes(rootPath, pageTemplate)
+    generateIndexesRecursively(rootPath, pageTemplate)
