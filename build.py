@@ -6,7 +6,7 @@ generates index.html when index.md is found.
 import pathlib
 PATH_REPO = pathlib.Path(__file__).parent
 import sys
-sys.path.insert(0, str(PATH_REPO.joinpath("src")))
+sys.path.insert(0, str(PATH_REPO))
 import palila
 
 if __name__ == "__main__":
