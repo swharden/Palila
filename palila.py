@@ -22,32 +22,6 @@ def recursivelyMakeIndexes(folder: pathlib.Path, templateFile: pathlib.Path):
         recursivelyMakeIndexes(subFolder, templateFile)
 
 
-def safeUrl(s: str):
-    """
-    Convert a string into a url-safe anchor tag
-    """
-
-    # must be lowercase
-    tag = s.lower()
-
-    # non-alphanumeric letters are replaced by dashes
-    letters = list(tag)
-    for i, letter in enumerate(letters):
-        if letter.isalpha() or letter.isnumeric():
-            continue
-        letters[i] = "-"
-    tag = "".join(letters)
-
-    # disallow multiple dashes
-    while "--" in tag:
-        tag = tag.replace("--", "-")
-
-    # disallow starting or ending with a dash
-    tag = tag.strip("-")
-
-    return tag
-
-
 class PageGenerator:
 
     def __init__(self, markdownFile: pathlib.Path, templateFile: pathlib.Path):
@@ -74,7 +48,7 @@ class PageGenerator:
                 continue
             if (line.startswith("#")):
                 hashes, title = line.split(" ", 1)
-                markdownLines[i] = f"{hashes} [{title}](#{safeUrl(title)})"
+                markdownLines[i] = f"{hashes} [{title}](#{self._getTagUrl(title)})"
                 tocItems.append([len(hashes), title])
 
         # replace one-line links with special content
@@ -103,7 +77,7 @@ class PageGenerator:
                 tocMarkdown = ""
                 for level, title in tocItems:
                     tocMarkdown += "  " * level + \
-                        f"* [{title}](#{safeUrl(title)})\n"
+                        f"* [{title}](#{self._getTagUrl(title)})\n"
                 markdownLines[i] = tocMarkdown
 
         # convert markdown to HTML
@@ -167,8 +141,30 @@ class PageGenerator:
                 linesWithoutCode.append(i)
         return linesWithoutCode
 
-    def __repr__(self) -> str:
-        return f"page generator for {self.folder}"
+    def _getTagUrl(self, s: str):
+        """
+        Convert a string into a url-safe anchor tag
+        """
+
+        # must be lowercase
+        tag = s.lower()
+
+        # non-alphanumeric letters are replaced by dashes
+        letters = list(tag)
+        for i, letter in enumerate(letters):
+            if letter.isalpha() or letter.isnumeric():
+                continue
+            letters[i] = "-"
+        tag = "".join(letters)
+
+        # disallow multiple dashes
+        while "--" in tag:
+            tag = tag.replace("--", "-")
+
+        # disallow starting or ending with a dash
+        tag = tag.strip("-")
+
+        return tag
 
 
 if __name__ == "__main__":
