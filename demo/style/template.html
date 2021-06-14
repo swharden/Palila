@@ -24,74 +24,97 @@
 
 </head>
 
-<body class="bg-light">
-    <div class="container mx-auto m-5">
-        <div class="shadow">
-            <div class="row bg-dark text-light">
 
-                <div>
-                    <div class="display-1 ps-3 pt-3">
-                        Palila
+<body>
+
+    <!-- these hold the content at the top with the accent background color -->
+
+    <div class="h-50 w-100 backgroundAccent"></div>
+
+    <div class="text-light">
+        <div class="container">
+
+            <!-- the navigation is the strip at the top -->
+            <nav class="navbar navbar-expand-lg navbar-dark">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto me-0">
+
+                            <li class="nav-item">
+                                <a class="nav-link btn fs-4 px-3" href="{{BASE_URL}}">Home</a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link btn fs-4 px-3 dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Examples
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="/demo/template">Template Tags</a></li>
+                                    <li><a class="dropdown-item" href="/demo/images">Image Formatting</a></li>
+                                    <li><a class="dropdown-item" href="/demo/toc">Table of Contents</a></li>
+                                    <li><a class="dropdown-item" href="/demo/videos">YouTube Videos</a></li>
+                                    <li><a class="dropdown-item" href="/demo/code">Syntax Highlighting</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link btn fs-4 px-3 dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Demos
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="/demo/advanced/csdv/">Data Visualization</a></li>
+                                    <li><a class="dropdown-item" href="/demo/advanced/ljpcalc/">LJPcalc</a></li>
+                                    <li><a class="dropdown-item" href="/demo/advanced/pyabf/">pyABF</a></li>
+                                </ul>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link btn fs-4 px-3" href="https://github.com/swharden/Palila">GitHub</a>
+                            </li>
+
+                        </ul>
                     </div>
                 </div>
+            </nav>
 
-                <!-- MENU URLS MUST BE ABSOLUTE -->
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <ul class="navbar-nav p-0 m-0">
+            <!-- the header contains the title and subtitle -->
+            <header class="mt-2">
+                <div class="display-2 fw-normal">
+                    <a href='#'>Palila</a>
+                </div>
 
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="/demo/">
-                                Home
-                            </a>
-                        </li>
-
-                        <li class="nav-item mx-2 dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                Demos
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="/demo/template">Template Tags</a></li>
-                                <li><a class="dropdown-item" href="/demo/images">Image Formatting</a></li>
-                                <li><a class="dropdown-item" href="/demo/toc">Table of Contents</a></li>
-                                <li><a class="dropdown-item" href="/demo/videos">YouTube Videos</a></li>
-                                <li><a class="dropdown-item" href="/demo/code">Syntax Highlighting</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item mx-2 dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
-                                Examples
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-dark">
-                                <li><a class="dropdown-item" href="/demo/advanced/csdv/">Data Visualization</a></li>
-                                <li><a class="dropdown-item" href="/demo/advanced/ljpcalc/">LJPcalc</a></li>
-                                <li><a class="dropdown-item" href="/demo/advanced/pyabf/">pyABF</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="nav-item mx-2">
-                            <a class="nav-link" href="https://github.com/swharden/Palila">
-                                GitHub
-                            </a>
-                        </li>
-
-                    </ul>
-                </nav>
-
-            </div>
-            <div class="row p-3 bg-white">
-                {{CONTENT}}
-            </div>
+                <div class="text-muted fs-5">
+                    Minimal static site generator using Python and Markdown
+                </div>
+            </header>
 
         </div>
+    </div>
 
-        <div class="text-muted my-4">
+    <!-- content goes here -->
+    <div class="container px-0">
+        <article>
+            <div class="shadow-lg my-3 px-4 pt-3 pb-2 bg-white border-top border-5" style="min-height: 20em;">
+                {{CONTENT}}
+            </div>
+        </article>
+    </div>
+
+    <!-- footer is not width constrained -->
+    <footer>
+        <div class="mt-5 mb-3 text-center text-muted">
             <a href='https://github.com/swharden/Palila'>Palila</a>
             generated this page from Markdown source
             in {{BUILD_TIME_MS}} milliseconds
             on {{BUILD_UTC_DATE}} at {{BUILD_UTC_TIME}} UTC
         </div>
-    </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"

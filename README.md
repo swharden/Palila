@@ -27,6 +27,10 @@ Palila uses [mustache](https://mustache.github.io) logic-less template tags
 
 This library was created with the intent only for the author to use it, but it is open-sourced (under the permissive MIT license) in case anyone else finds it useful.
 
+## TODO
+* sitemap.xml
+* RSS feed
+
 ### About the Name
 
 [Pelican](https://getpelican.com) is a full-featured static site generator powered by Python. Compared to the pelican, [the palila](https://en.wikipedia.org/wiki/Palila) is quite small.

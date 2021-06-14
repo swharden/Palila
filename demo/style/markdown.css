@@ -71,16 +71,20 @@ td {
 
 /* increase space around headings */
 
-h1 {
-    margin: 1em 0em .5em 0em !important;
+article h1:first-of-type {
+    margin: 0 !important;
 }
 
-h2 {
-    margin: 1em 0em .5em 0em !important;
+article h1 {
+    margin: 1em 0em .5em 0em;
 }
 
-h3 {
-    margin: 1em 0em .5em 0em !important;
+article h2 {
+    margin: 1em 0em .5em 0em;
+}
+
+article h3 {
+    margin: 1em 0em .5em 0em;
 }
 
 /* increase space around lists */
