@@ -24,6 +24,8 @@ import markdown
 import time
 import argparse
 
+__version__ = "1.0.0"
+
 
 def generateIndexesRecursively(folder: pathlib.Path, templateFile: pathlib.Path, siteRoot: pathlib.Path):
     """
