@@ -91,7 +91,7 @@ class PageGenerator:
 
             if "://youtu" in line.lower():
                 url = "https://www.youtube.com/embed/" + pathlib.Path(url).name
-                markdownLines[i] = "<div class='ratio ratio-16x9 my-5'>" + \
+                markdownLines[i] = "<div class='ratio ratio-16x9 my-5 youTubeVideo'>" + \
                     f"<object class='border border-dark shadow' data='{url}'></object></div>"
                 continue
 
