@@ -15,21 +15,19 @@
             background-color: #1f3d4b;
         }
 
-        nav .btn {
-            background-color: #1f3d4b00;
-            border: none;
-            color: #FFFFFF66;
+        header a {
+            color: white;
+            text-decoration: none;
+        }
+
+        header a:hover {
+            color: white;
+            text-decoration: underline;
         }
 
         nav .btn:hover {
             background-color: #00000033;
             color: #FFFFFFFF !important;
-        }
-
-        footer {
-            bottom: 0;
-            color: #00000044;
-            height: 60px;
         }
     </style>
 </head>
@@ -37,7 +35,7 @@
 <body>
 
     <div class="text-light backgroundAccent border-bottom border-3">
-        <div class="container">
+        <div class="container" style="max-width: 1000px;">
             <nav class="navbar navbar-expand-lg navbar-dark">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -55,6 +53,17 @@
                             <li class="nav-item">
                                 <a class="nav-link btn fs-4 px-3" href="#">Tertiary</a>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link btn fs-4 px-3 dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Dropdown
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#">Alpha</a></li>
+                                    <li><a class="dropdown-item" href="#">Beta</a></li>
+                                    <li><a class="dropdown-item" href="#">Gamma</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -62,7 +71,7 @@
 
             <header class="my-2">
                 <div class="display-2 fw-normal">
-                    Page Title
+                    <a href='#'>Page Title</a>
                 </div>
 
                 <div class="text-muted fs-5">
@@ -73,8 +82,57 @@
         </div>
     </div>
 
-    <div class="container py-4">
+    <div class="container py-4" style="max-width: 1000px;">
+
         <h1>Hello, world!</h1>
+
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sodales mi vel semper suscipit. Praesent
+            tempor orci vitae tortor feugiat blandit. Fusce eget condimentum libero. Nulla maximus porta ligula.
+            Nulla
+            vestibulum ante at elit imperdiet varius. Duis erat justo, feugiat id tellus quis, posuere posuere
+            dolor.
+            Aliquam accumsan ante nec mi commodo volutpat id in leo. Duis posuere blandit egestas. Vestibulum nulla
+            leo,
+            vulputate id dapibus sed, malesuada eget nisi. Donec congue pretium risus id viverra.
+        </p>
+        <p>
+            Nulla quam erat, pharetra fringilla lacinia ut, venenatis id libero. Sed malesuada tellus nec lacinia
+            finibus. Nulla at dui nec lacus mattis tristique. Aliquam consequat pharetra tristique. Ut eget ex ex.
+            Fusce
+            tellus ante, aliquet eget elit id, convallis lobortis urna. Integer pellentesque accumsan risus vel
+            pharetra. Maecenas id nunc nibh. Curabitur a bibendum augue, eu dignissim leo. Curabitur ut viverra
+            augue.
+            Donec blandit augue nulla, eu fringilla risus tempus et. Fusce suscipit congue leo sit amet commodo.
+        </p>
+        <p>
+            Duis fringilla enim vitae lacinia dictum. Vestibulum vitae libero laoreet, varius nulla ut, iaculis
+            lorem.
+            Donec sit amet interdum mauris. In vulputate iaculis dui eu vestibulum. Etiam convallis sit amet libero
+            eget
+            tempus. Etiam placerat pretium purus vitae cursus. Curabitur lacinia ante lorem, at laoreet justo
+            scelerisque vel. Fusce condimentum tempus arcu vel pharetra. Proin hendrerit sodales lacinia. Integer et
+            est
+            eu arcu pharetra dapibus. Nam eu finibus mi.
+        </p>
+        <p>
+            Praesent tempus semper metus, a sodales lorem gravida ut. Vestibulum ornare molestie metus sed pretium.
+            Morbi tempor sit amet lectus vel iaculis. Cras iaculis mauris vitae congue ultricies. Cras accumsan
+            porttitor mauris, id laoreet tellus tincidunt eu. In a cursus nulla. Proin vehicula, turpis a porta
+            consequat, arcu purus ultricies leo, ac vehicula massa justo et arcu. In accumsan vulputate magna, ut
+            ornare
+            ex efficitur vitae.
+        </p>
+        <p>
+            Cras dictum erat et felis hendrerit, nec pellentesque nisl feugiat. Sed et quam dapibus, efficitur
+            mauris
+            eu, mattis massa. Cras egestas vel lectus quis scelerisque. Nullam tristique hendrerit quam eget
+            malesuada.
+            Aenean at viverra ligula, non accumsan nibh. Pellentesque porta magna neque, quis porttitor tortor
+            malesuada
+            vel. Cras fermentum tincidunt nulla, at egestas leo. Nulla vehicula nisi id dolor convallis vehicula.
+            Aliquam a vehicula dui. Ut laoreet pharetra arcu, eu tristique neque efficitur vel. Sed at cursus ante.
+        </p>
 
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sodales mi vel semper suscipit. Praesent
@@ -126,7 +184,7 @@
     </div>
 
     <footer>
-        <div class="my-5 text-center">
+        <div class="mt-5 mb-3 text-center text-muted">
             copyright info
         </div>
     </footer>
