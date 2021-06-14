@@ -220,18 +220,18 @@ class PageGenerator:
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Build a website with Palila')
-    parser.add_argument('-r', metavar='FOLDER', type=pathlib.Path, required=True,
+    parser.add_argument('--root', metavar='FOLDER', type=pathlib.Path, required=True,
                         help='root website folder to recursively search for markdown files')
-    parser.add_argument('-p', metavar='FILE', type=pathlib.Path, required=True,
+    parser.add_argument('--template', metavar='FILE', type=pathlib.Path, required=True,
                         help='path to page template')
     args = parser.parse_args()
 
-    rootPath = pathlib.Path(args.r).resolve()
+    rootPath = pathlib.Path(args.root).resolve()
     if not rootPath.exists() or not rootPath.is_dir():
         raise Exception(f"folder does not exist: {rootPath}")
     print(f"root folder: {rootPath}")
 
-    pageTemplate = pathlib.Path(args.p).resolve()
+    pageTemplate = pathlib.Path(args.template).resolve()
     if not pageTemplate.exists() or not pageTemplate.is_file():
         raise Exception(f"file does not exist: {pageTemplate}")
     print(f"page template: {pageTemplate}")

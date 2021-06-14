@@ -1,1 +1,1 @@
-palila.py -r demo -p demo/style/template.html
+palila.py --root demo --template demo/style/template.html
