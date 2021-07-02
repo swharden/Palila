@@ -20,14 +20,14 @@ Include images inside `div` blocks with certain classes to control how they disp
 * To include markdown inside HTML `div` apply the `markdown="block"` attribute
 
 ```html
-<div markdown="block" class="text-center">
+<div class="text-center">
 
 ![](small.jpg)
 
 </div>
 ```
 
-<div markdown="block" class="text-center">
+<div class="text-center">
 
 ![](small.jpg)
 
@@ -36,14 +36,14 @@ Include images inside `div` blocks with certain classes to control how they disp
 ## Border and Shadow
 
 ```html
-<div markdown="block" class="text-center img-border">
+<div class="text-center img-border">
 
 ![](small.jpg)
 
 </div>
 ```
 
-<div markdown="block" class="text-center img-border">
+<div class="text-center img-border">
 
 ![](small.jpg)
 
@@ -59,7 +59,7 @@ Size of large images can be constrained with the following classes:
 
 ### Micro
 
-<div markdown="block" class="text-center img-border img-micro">
+<div class="text-center img-border img-micro">
 
 ![](large.jpg)
 ![](large.jpg)
@@ -69,7 +69,7 @@ Size of large images can be constrained with the following classes:
 
 ### Small
 
-<div markdown="block" class="text-center img-border img-small">
+<div class="text-center img-border img-small">
 
 ![](large.jpg)
 ![](large.jpg)
@@ -78,7 +78,7 @@ Size of large images can be constrained with the following classes:
 
 ### Medium
 
-<div markdown="block" class="text-center img-border img-medium">
+<div class="text-center img-border img-medium">
 
 ![](large.jpg)
 
@@ -86,7 +86,7 @@ Size of large images can be constrained with the following classes:
 
 ### No Restriction
 
-<div markdown="block" class="text-center img-border">
+<div class="text-center img-border">
 
 ![](large.jpg)
 
@@ -94,7 +94,7 @@ Size of large images can be constrained with the following classes:
 
 ### Remote Image
 
-<div markdown="block" class="text-center img-border">
+<div class="text-center img-border">
 
 ![](https://mods.org/wp-content/uploads/2017/02/test-image.png)
 
